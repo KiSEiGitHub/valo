@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Divider } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { useState } from "react";
 import "swiper/css";
@@ -14,12 +14,14 @@ const Home = ({ agent, agentDefault }: any) => {
     <Box h="100vh" pos="relative">
       <AgentInfo agent={agentObject} />
       <Box pos="absolute" bottom={0} w="100%" h="auto">
+        <Divider my={3}/>
         <Swiper
           style={{
             height: "100%",
+            padding: "10px",
           }}
-          slidesPerView={7}
-          spaceBetween={10}
+          slidesPerView={9}
+          spaceBetween={5}
           pagination={{
             clickable: true,
           }}

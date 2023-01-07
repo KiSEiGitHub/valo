@@ -5,7 +5,6 @@ const IconBox = ({ icon }: any) => {
     <Box
         w='100%'
         h='100%'
-        border='1px solid #000'
     >
       <Image src={icon} alt="ok" w="150px" mx='auto'/>
     </Box>
