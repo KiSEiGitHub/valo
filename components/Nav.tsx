@@ -33,6 +33,7 @@ const Nav = () => {
             <Link href='/weapons' display='block' mb={3}>Weapons</Link>
             <Link href='/maps' display='block' mb={3}>Maps</Link>
             <Link href='/sprays' display='block' mb={3}>Sprays</Link>
+            <Link href='/buddies' display='block' mb={3}>Buddies</Link>
           </DrawerBody>
         </DrawerContent>
       </Drawer>
