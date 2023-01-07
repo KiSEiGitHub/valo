@@ -16,7 +16,6 @@ import { useRef } from "react";
 
 const Nav = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef();
 
   return (
     <>
@@ -31,7 +30,9 @@ const Nav = () => {
 
           <DrawerBody>
             <Link href='/' display='block' mb={3}>Agents</Link>
-            <Link href='/weapons'>Weapons</Link>
+            <Link href='/weapons' display='block' mb={3}>Weapons</Link>
+            <Link href='/maps' display='block' mb={3}>Maps</Link>
+            <Link href='/sprays' display='block' mb={3}>Sprays</Link>
           </DrawerBody>
         </DrawerContent>
       </Drawer>
