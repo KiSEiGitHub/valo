@@ -5,18 +5,21 @@ import {
   Grid,
   GridItem,
   Heading,
-  HStack,
-  Image,
-  Text,
+  HStack, Text
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
+import { useState } from "react";
 import { BiBody } from "react-icons/bi";
 import WeaponInfo from "../components/Layout/WeaponInfo";
 
-const WeaponBox = ({ img, name, stat }: any) => {
+const WeaponBox = ({ img, name, stat, skins }: any) => {
+  const [wep, setWep] = useState("Vandal");
+
   return (
     <Box w="350px" h="300px" bg="#fff" borderRadius="xl" pos="relative" p={5}>
-      <WeaponInfo img={img}/>
+      <Box onClick={() => setWep(name)}>
+        <WeaponInfo img={img} name={name} skins={skins} />
+      </Box>
       <Heading color="#000" size="md" textAlign="center" mt={3}>
         {name}
       </Heading>
@@ -47,10 +50,22 @@ const WeaponBox = ({ img, name, stat }: any) => {
           <Text pos="absolute" color="red" fontWeight={800} right={5} top="5px">
             {stat.damageRanges[0].headDamage}
           </Text>
-          <Text pos="absolute" color="red" fontWeight={800} right={5} top="40px">
+          <Text
+            pos="absolute"
+            color="red"
+            fontWeight={800}
+            right={5}
+            top="40px"
+          >
             {stat.damageRanges[0].bodyDamage}
           </Text>
-          <Text pos="absolute" color="red" fontWeight={800} right={5} top="75px">
+          <Text
+            pos="absolute"
+            color="red"
+            fontWeight={800}
+            right={5}
+            top="75px"
+          >
             {stat.damageRanges[0].legDamage}
           </Text>
         </GridItem>
@@ -59,7 +74,7 @@ const WeaponBox = ({ img, name, stat }: any) => {
   );
 };
 
-const Weapons = ({ weapons }: any) => {
+const Weapons = ({ weapons, skins }: any) => {
   return (
     <Flex
       flexWrap="wrap"
@@ -76,6 +91,7 @@ const Weapons = ({ weapons }: any) => {
             img={item.displayIcon}
             name={item.displayName}
             stat={item.weaponStats}
+            skins={skins}
           />
         </Box>
       ))}
@@ -89,5 +105,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const res = await fetch("https://valorant-api.com/v1/weapons");
   const { data } = await res.json();
   const weapon = data.filter((word: any) => word.displayName != "Melee");
-  return { props: { weapons: weapon } };
+
+  const resSkin = await fetch("https://valorant-api.com/v1/weapons/skins");
+  const { data: skins } = await resSkin.json();
+
+  return { props: { weapons: weapon, skins: skins } };
 };
