@@ -7,12 +7,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import AgentInfo from "../components/Layout/AgentInfo";
 import IconBox from "../components/Layout/IconBox";
 
-const Home = ({ agent }: any) => {
-  const [agentObject, setAgentObject] = useState({});
+const Home = ({ agent, agentDefault }: any) => {
+  const [agentObject, setAgentObject] = useState(agentDefault);
 
   return (
     <Box h="100vh" pos="relative">
-      <AgentInfo agent={agentObject}/>
+      <AgentInfo agent={agentObject} />
       <Box pos="absolute" bottom={0} w="100%" h="auto">
         <Swiper
           style={{
@@ -44,5 +44,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const res = await fetch("https://valorant-api.com/v1/agents");
   const { data } = await res.json();
 
-  return { props: { agent: data } };
+  const resDefault = await fetch(
+    "https://valorant-api.com/v1/agents/dade69b4-4f5a-8528-247b-219e5a1facd6"
+  );
+  const { data: dataDefault } = await resDefault.json();
+
+  return { props: { agent: data, agentDefault: dataDefault } };
 };

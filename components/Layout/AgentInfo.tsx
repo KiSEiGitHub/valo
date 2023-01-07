@@ -18,7 +18,6 @@ const AgentInfo = ({ agent }: any) => {
     <Grid
       templateColumns="repeat(2, 1fr)"
       pt={5}
-      bg={agent.backgroundGradientColors[1]}
     >
       <GridItem
         colStart={1}
