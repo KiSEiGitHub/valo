@@ -1,18 +1,33 @@
-import { Box, Heading, Image } from "@chakra-ui/react";
+import { Box, Flex, Heading, Image } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 
 const Maps = ({ maps }: any) => {
   return (
-    <>
+    <Flex
+      flexWrap="wrap"
+      gap={5}
+      pt={90}
+      alignItems="center"
+      p={10}
+      justifyContent="center"
+    >
       {maps.map((item: any, key: number) => (
-        <Box pos='relative' key={key}>
-          <Heading pos="sticky" top={0} ml={20}>
+        <Box pos="relative" key={key}>
+          <Heading
+            pos="absolute"
+            top="50%"
+            left="50%"
+            transform="translate(-50%, -50%)"
+            backdropFilter="blur(5px)"
+            px={5}
+            borderRadius="lg"
+          >
             {item.displayName}
           </Heading>
-          <Image src={item.splash} alt="ok" />
+          <Image src={item.listViewIcon} alt="ok" borderRadius="md" />
         </Box>
       ))}
-    </>
+    </Flex>
   );
 };
 
