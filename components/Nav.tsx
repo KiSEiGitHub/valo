@@ -10,6 +10,7 @@ import {
   useDisclosure,
   Button,
   Input,
+  Link,
 } from "@chakra-ui/react";
 import { useRef } from "react";
 
@@ -26,18 +27,12 @@ const Nav = () => {
         <DrawerOverlay />
         <DrawerContent zIndex={5}>
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader>Valorant</DrawerHeader>
 
           <DrawerBody>
-            <Input placeholder="Type here..." />
+            <Link href='/' display='block' mb={3}>Agents</Link>
+            <Link href='/weapons'>Weapons</Link>
           </DrawerBody>
-
-          <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="blue">Save</Button>
-          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>
