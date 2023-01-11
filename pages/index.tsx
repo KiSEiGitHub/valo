@@ -1,4 +1,4 @@
-import { Box, Divider } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { useState } from "react";
 import "swiper/css";
@@ -14,12 +14,7 @@ const Home = ({ agent, agentDefault }: any) => {
     <Box h="100vh" pos="relative">
       <AgentInfo agent={agentObject} />
       <Box pos="absolute" bottom={0} w="100%" h="auto">
-        <Divider my={3}/>
         <Swiper
-          style={{
-            height: "100%",
-            padding: "10px",
-          }}
           slidesPerView={9}
           spaceBetween={5}
           pagination={{
@@ -42,7 +37,7 @@ const Home = ({ agent, agentDefault }: any) => {
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
   const res = await fetch("https://valorant-api.com/v1/agents");
   const { data } = await res.json();
 

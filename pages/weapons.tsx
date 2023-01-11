@@ -5,7 +5,8 @@ import {
   Grid,
   GridItem,
   Heading,
-  HStack, Text
+  HStack,
+  Text,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { useState } from "react";
@@ -74,7 +75,7 @@ const WeaponBox = ({ img, name, stat, skins }: any) => {
   );
 };
 
-const Weapons = ({ weapons, skins }: any) => {
+const Weapons = ({ weapons }: any) => {
   return (
     <Flex
       flexWrap="wrap"
@@ -91,7 +92,7 @@ const Weapons = ({ weapons, skins }: any) => {
             img={item.displayIcon}
             name={item.displayName}
             stat={item.weaponStats}
-            skins={skins}
+            skins={item.skins}
           />
         </Box>
       ))}
@@ -106,8 +107,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { data } = await res.json();
   const weapon = data.filter((word: any) => word.displayName != "Melee");
 
-  const resSkin = await fetch("https://valorant-api.com/v1/weapons/skins");
-  const { data: skins } = await resSkin.json();
 
-  return { props: { weapons: weapon, skins: skins } };
+  return { props: { weapons: weapon } };
 };

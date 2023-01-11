@@ -1,19 +1,18 @@
 import {
+  Image,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Text,
   useDisclosure,
-  Image,
-  Box,
 } from "@chakra-ui/react";
-import { GetServerSideProps } from "next";
 
 const WeaponInfo = ({ img, name, skins }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  console.log(skins);
 
   return (
     <>
@@ -32,7 +31,11 @@ const WeaponInfo = ({ img, name, skins }: any) => {
         <ModalContent bg="#0e1921">
           <ModalHeader>{name}</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>hello</ModalBody>
+          <ModalBody>
+            {skins.map((item: any, key: any) => (
+              <Text>{item.displayName}</Text>
+            ))}
+          </ModalBody>
         </ModalContent>
       </Modal>
     </>

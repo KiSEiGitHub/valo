@@ -15,7 +15,7 @@ import {
 
 const AgentInfo = ({ agent }: any) => {
   return (
-    <Grid
+      <Grid
       templateColumns="repeat(2, 1fr)"
       pt={5}
       h="full"
