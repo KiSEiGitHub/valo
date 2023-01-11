@@ -1,4 +1,7 @@
 import {
+  Grid,
+  GridItem,
+  Heading,
   Image,
   Modal,
   ModalBody,
@@ -6,9 +9,12 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import { Pagination } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const WeaponInfo = ({ img, name, skins }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,9 +38,28 @@ const WeaponInfo = ({ img, name, skins }: any) => {
           <ModalHeader>{name}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {skins.map((item: any, key: any) => (
-              <Text>{item.displayName}</Text>
-            ))}
+
+                <Swiper
+                  slidesPerView={5}
+                  spaceBetween={30}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[Pagination]}
+                  className="mySwiper"
+                >
+                  {skins.map((item: any, key: any) => (
+                    <SwiperSlide key={key} style={{ height: "160px" }}>
+                      <Image
+                        src={item.displayIcon}
+                        alt={item.displayName}
+                        objectFit="cover"
+                        pointerEvents="none"
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+
           </ModalBody>
         </ModalContent>
       </Modal>
