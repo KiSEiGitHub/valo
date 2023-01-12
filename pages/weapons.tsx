@@ -1,12 +1,12 @@
 import {
-  Box,
-  Divider,
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-  HStack,
-  Text,
+    Box,
+    Divider,
+    Flex,
+    Grid,
+    GridItem,
+    Heading,
+    HStack,
+    Text
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { useState } from "react";

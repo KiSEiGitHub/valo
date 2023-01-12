@@ -1,6 +1,7 @@
 import {
-  Grid,
-  GridItem,
+  Box,
+  Divider,
+  Flex,
   Heading,
   Image,
   Modal,
@@ -9,17 +10,19 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { Pagination } from "swiper";
+import { useState } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
+import VariantArme from "./VariantArme";
 
 const WeaponInfo = ({ img, name, skins }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log(skins);
-
+  const [arme, setArme] = useState(skins[0]);
+  const [variant, setVariant] = useState(undefined);
   return (
     <>
       <Image
@@ -38,28 +41,64 @@ const WeaponInfo = ({ img, name, skins }: any) => {
           <ModalHeader>{name}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-
-                <Swiper
-                  slidesPerView={5}
-                  spaceBetween={30}
-                  pagination={{
-                    clickable: true,
-                  }}
-                  modules={[Pagination]}
-                  className="mySwiper"
-                >
-                  {skins.map((item: any, key: any) => (
-                    <SwiperSlide key={key} style={{ height: "160px" }}>
+            <Box>
+              <Image src={arme.displayIcon} alt="arme" w="750px" mx="auto" />
+              <Heading textAlign="center" mt={20}>
+                {arme.displayName}
+              </Heading>
+              {arme.chromas[0].swatch && (
+                <Flex gap={2}>
+                  {arme.chromas.map((item: any, key: number) => (
+                    <VariantArme
+                      title={item.displayName}
+                      swatch={item.swatch}
+                      img={item.fullRender}
+                    />
+                  ))}
+                </Flex>
+              )}
+              {arme.levels[1] && (
+                <Box my={5} maxW="263px">
+                  {arme.levels.map((item: any, key: number) => {
+                    return (
+                      <Flex w="100%" h="50px" my={3} gap={5} key={key}>
+                        <Box>
+                          <Heading>1</Heading>
+                        </Box>
+                        <Box flex={1}>
+                          <Text>4</Text>
+                        </Box>
+                      </Flex>
+                    );
+                  })}
+                </Box>
+              )}
+            </Box>
+            <Divider my={20} />
+            <Box>
+              <Swiper
+                slidesPerView={5}
+                spaceBetween={30}
+                pagination={{
+                  clickable: true,
+                }}
+                className="mySwiper"
+              >
+                {skins.map((item: any, key: any) => (
+                  <SwiperSlide key={key}>
+                    <Box onClick={() => setArme(item)}>
                       <Image
+                        onClick={() => setVariant(undefined)}
                         src={item.displayIcon}
                         alt={item.displayName}
                         objectFit="cover"
                         pointerEvents="none"
                       />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-
+                    </Box>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </Box>
           </ModalBody>
         </ModalContent>
       </Modal>
